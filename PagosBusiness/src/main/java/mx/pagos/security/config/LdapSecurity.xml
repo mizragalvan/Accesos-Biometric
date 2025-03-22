@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:sec="http://www.springframework.org/schema/security"
+        xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        ">
+
+    <bean id="waffleWindowsAuthProvider" class="waffle.windows.auth.impl.WindowsAuthProviderImpl" />    
+	 
+	<bean id="negotiateSecurityFilterProvider" class="waffle.servlet.spi.NegotiateSecurityFilterProvider">
+	    <constructor-arg ref="waffleWindowsAuthProvider" />
+	    <property name="protocols">
+	        <list>
+	            <value>Negotiate</value>
+	            <value>NTLM</value>
+	        </list>
+	    </property>
+	</bean>
+	
+	<bean id="basicSecurityFilterProvider" class="waffle.servlet.spi.BasicSecurityFilterProvider">
+	    <constructor-arg ref="waffleWindowsAuthProvider" />
+	</bean>
+	
+	<bean id="waffleSecurityFilterProviderCollection" class="waffle.servlet.spi.SecurityFilterProviderCollection">
+	    <constructor-arg>
+	        <list>
+	            <ref bean="negotiateSecurityFilterProvider" />               
+	            <ref bean="basicSecurityFilterProvider" />               
+	        </list>
+	    </constructor-arg>
+	</bean>    
+	
+	<bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/errors/403" />
+        <property name="useForward" value="true" />
+	</bean>
+
+	<bean id="accessDeniedHandler" class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+  	  <property name="errorPage" value="/errors/403" />
+	</bean>
+        
+    <sec:http entry-point-ref="negotiateSecurityFilterEntryPoint">
+	    <sec:intercept-url pattern="/**" access="authenticated" />
+	    <sec:custom-filter ref="waffleNegotiateSecurityFilter" position="BASIC_AUTH_FILTER" />
+	    <sec:csrf request-matcher-ref="CsrfSecurityRequestMatcher"/>
+	</sec:http>
+
+	<bean id="negotiateSecurityFilterEntryPoint" class="waffle.spring.NegotiateSecurityFilterEntryPoint">
+	    <property name="Provider" ref="waffleSecurityFilterProviderCollection" />
+	</bean>  
+	 
+	<sec:authentication-manager alias="authenticationProvider" />
+	
+	<bean id="waffleNegotiateSecurityFilter" class="waffle.spring.NegotiateSecurityFilter">
+    <property name="Provider" ref="waffleSecurityFilterProviderCollection" />
+    <property name="AllowGuestLogin" value="false" />
+    <property name="PrincipalFormat" value="fqn" />
+    <property name="RoleFormat" value="both" />
+</bean>
+
+</beans>

@@ -1,0 +1,89 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>App</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-button id="open-custom-dialog" expand="block">Open Custom Dialog</ion-button>
+
+  <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+    <ng-template>
+      <div class="wrapper">
+        <h1>Dialog header</h1>
+
+        <ion-list lines="none">
+          <ion-item button="true" detail="false" (click)="modal.dismiss()">
+            <ion-icon name="person-circle"></ion-icon>
+            <ion-label>Item 1</ion-label>
+          </ion-item>
+          <ion-item button="true" detail="false" (click)="modal.dismiss()">
+            <ion-icon name="person-circle"></ion-icon>
+            <ion-label>Item 2</ion-label>
+          </ion-item>
+          <ion-item button="true" detail="false" (click)="modal.dismiss()">
+            <ion-icon name="person-circle"></ion-icon>
+            <ion-label>Item 3</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content> -->
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Seleccionar Hora</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+    <ion-button slot="start" fill="clear" color="medium">
+      <ion-icon slot="icon-only" name="time-outline"></ion-icon>
+    </ion-button>
+    <ion-datetime
+      placeholder="Hora de Entrada"
+      presentation="time"
+      [value]="horaEntrada"
+      (ionChange)="onEntradaChange($event)"
+      class="custom-datetime"
+    >
+    <div slot="label">Hora de Entrada <ion-text color="danger">*</ion-text></div>
+  </ion-datetime>
+</ion-item>
+</ion-content> -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Seleccionar Hora de Entrada</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="modal-content">
+    <!-- Componente de hora -->
+    <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+      <!-- <ion-button slot="start" fill="clear" color="medium">
+        <ion-icon slot="icon-only" name="time-outline"></ion-icon>
+      </ion-button> -->
+      <ion-datetime
+        placeholder="Hora de Entrada"
+        presentation="time"
+        [value]="horaEntrada"
+        (ionChange)="onEntradaChange($event)"
+        class="custom-datetime"
+      >
+        <div slot="label">Hora de Entrada <ion-text color="danger">*</ion-text></div>
+      </ion-datetime>
+    </ion-item>
+
+    <!-- Botón de confirmación para cerrar el modal y devolver la hora -->
+    <ion-button expand="block" (click)="dismissModal()">Confirmar</ion-button>
+  </div>
+</ion-content>

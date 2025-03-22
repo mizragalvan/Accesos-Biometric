@@ -1,0 +1,351 @@
+<ion-content [fullscreen]="true">
+  
+    
+  <ion-card *ngIf="mostrarAccesos">
+      <div class="scrollable-table">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Entrada</th>
+              <th>Salida</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.date | date: 'short' }}</td>
+              <td>{{ user.date | date: 'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    
+  </ion-card>
+
+
+<ion-card *ngIf="mostrarInicio && !mostrarAccesos">
+  <div class="time-box">
+    {{ currentTime }}
+  </div>
+
+
+  <div class="container">
+    <ion-row>
+      <ion-col size="12">
+
+        <div >
+          <!-- Cámara -->
+          
+          <video #videoElement autoplay muted playsinline class="camera-box"></video>
+          <canvas #canvas></canvas>
+          
+        </div>
+      </ion-col>
+      <!-- <ion-col size="12">
+
+        <div>
+          <button *ngIf="!isCameraOn" (click)="startCamera()">Iniciar Cámara</button>
+          <button *ngIf="isCameraOn" (click)="stopCamera()">Detener Cámara</button>
+        </div>
+      </ion-col> -->
+      <ion-col size="12" *ngIf="!isCameraOn">
+        <ion-button
+          expand="block"
+          size="large"
+          color="light"
+          (click)="startCamera()"
+        >
+        <ion-icon slot="icon-only" name="play-circle-outline" color="success"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" *ngIf="isCameraOn">
+        <ion-button
+          expand="block"
+          size="large"
+          color="light"
+          (click)="stopCamera()"
+          
+        >
+        <ion-icon slot="icon-only" name="stop-circle-outline" color="danger"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+      <!-- <div style="position: relative;">
+        <video #videoElement autoplay muted playsinline style="width: 250px; height: 350px;"></video>
+        <canvas #canvas style="position: absolute; top: 0; left: 0;"></canvas>
+      </div> -->
+ 
+      
+    </div>
+
+
+<!-- verify face id -->
+<ion-row class="ion-margin authorize">
+  <ion-col size="9">
+    <ion-button
+      expand="block"
+      size="large"
+      class="faceid"
+      (click)="mostrarFrmContrasena()"
+    >
+    <ion-icon slot="icon-only" name="finger-print-outline"></ion-icon>
+    
+      <ion-text class="ion-text-wrap">
+        <strong> Crear Usuario </strong>
+        <!-- <span> (Face ID / FingerPrint) </span> -->
+      </ion-text>
+    </ion-button>
+  </ion-col>
+  <ion-col size="3">
+    <ion-button
+      expand="block"
+      size="large"
+      color="light"
+      (click)="deleteCredentials()"
+    >
+      <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-row>
+
+</ion-card>
+
+<ion-card *ngIf="!mostrarInicio && !mostrarAccesos" style="margin-top: -100px;">
+  <form [formGroup]="form" >
+      <div class="ion-text-center ion-margin-vertical lock">
+        <ion-icon name="lock-closed"></ion-icon>
+      </div>
+
+      <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+          <ion-button slot="start" fill="clear" color="medium">
+            <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+          </ion-button>
+          <ion-input
+            labelPlacement="floating"
+            type="text"
+            inputmode="nombre"
+            formControlName="nombre"
+            placeholder="Nombre(s)"
+            errorText="* Ingrese su nombre"
+            enterkeyhint="next"
+          >
+            <div slot="label">
+              Nombre(s) <ion-text color="danger">*</ion-text>
+            </div>
+          </ion-input>
+        </ion-item>
+      <ion-row>
+          <!-- Primer elemento a la izquierda -->
+          <ion-col size="6" class="ion-text-start">
+            <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+              <!-- <ion-button slot="start" fill="clear" color="medium">
+                <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
+              </ion-button> -->
+              <ion-input
+                labelPlacement="floating"
+                type="text"
+                inputmode="ape_paterno"
+                formControlName="ape_paterno"
+                placeholder="Apellido Paterno"
+                errorText="* Ingrese su apellido paterno"
+                enterkeyhint="next"
+              >
+                <div slot="label">
+                  Apellido Paterno <ion-text color="danger">*</ion-text>
+                </div>
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        
+          <!-- Segundo elemento a la derecha -->
+          <ion-col size="6" class="ion-text-end">
+            <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+              <!-- <ion-button slot="start" fill="clear" color="medium">
+                <ion-icon slot="icon-only" name="reorder-two-outline"></ion-icon>
+              </ion-button> -->
+              <ion-input
+                labelPlacement="floating"
+                type="text"
+                inputmode="ape_materno"
+                formControlName="ape_materno"
+                placeholder="Apellido Materno"
+                errorText="* Ingrese su apellido materno"
+                enterkeyhint="next"
+              >
+                <div slot="label">
+                  Apellido Materno <ion-text color="danger">*</ion-text>
+                </div>
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+       
+          <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+            <ion-button slot="start" fill="clear" color="medium" disabled>
+              <ion-icon slot="icon-only" name="mail-outline"></ion-icon>
+            </ion-button>
+            <ion-input
+              labelPlacement="floating"
+              type="email"
+              inputmode="email"
+              formControlName="email"
+              placeholder="Enter email address"
+              errorText="* Ingrese un correo valido"
+              enterkeyhint="next"
+            >
+              <div slot="label">Email <ion-text color="danger">*</ion-text></div>
+            </ion-input>
+          </ion-item>
+
+          <!-- <div *ngIf="form.controls['password'].hasError('uppercaseRequired') && form.controls['password'].touched">
+            <ion-text color="danger">La contraseña debe contener al menos una letra mayúscula.</ion-text>
+          </div> -->
+         
+        
+      <ion-row>
+      <ion-col size="8" class="ion-text-start">
+        <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+          <!-- <ion-button slot="start" fill="clear" color="medium">
+            <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+          </ion-button> -->
+          <ion-select
+            labelPlacement="floating"
+            placeholder="Seleccionar fruta"
+            interface="popover"
+            class="custom-select"
+            label="Seleccione un puesto"
+            formControlName="puesto"
+            aria-hidden="true"
+          >
+            <ion-select-option value="apples">Manzanas</ion-select-option>
+            <ion-select-option value="oranges">Naranjas</ion-select-option>
+            <ion-select-option value="bananas">Plátanos</ion-select-option>
+          </ion-select>
+          <div slot="label">Seleccionar su cargo <ion-text color="danger">*</ion-text></div>
+        </ion-item>
+        </ion-col>
+       
+        <!-- <ion-col size="4" class="ion-text-start">
+          <div class="container">
+            <div class="camera-box">
+              Finger
+            </div>
+          </div>
+        </ion-col> -->
+        <ion-col size="4" class="ion-text-start">
+          <div class="container">
+            <!-- <div class="camera-box" (click)="registerFingerprint()">
+              Finger
+            </div> -->
+            <!-- <div>
+              <button (click)="onIdentifyButtonClick()">Identify</button>
+              <p>VisitorId: {{ visitorId }}</p>
+            </div> -->
+
+            <!-- <div class="camera-box" (click)="addFingerprint()">
+              <p>VisitorId: {{ visitorId }}</p>
+            </div> -->
+            
+          </div>
+        </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="8" class="ion-text-start">
+
+
+            <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+          <ion-select
+            labelPlacement="floating"
+            interface="popover"
+            class="custom-select"
+            label="Seleccione dias laborales"
+            formControlName="puesto"
+            aria-hidden="true"
+            [formControlName]="'dias_trabajo'" 
+            multiple="true">
+      <ion-select-option *ngFor="let dia of diasSemana" [value]="dia">
+        {{ dia }}
+      </ion-select-option>
+    </ion-select>
+            </ion-item>
+  
+  
+  
+          </ion-col>
+        </ion-row>
+
+       <ion-row>
+      <ion-col  size="6" class="ion-text-start">
+      <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+        <!-- <ion-label>Hora Entrada:</ion-label>
+        <ion-text>{{ horaEntrada | date: 'shortTime' }}</ion-text> -->
+  
+              <ion-input 
+              labelPlacement="floating" 
+              type="text"
+              inputmode="entrada"
+              placeholder="Hora de salida"
+              errorText="* Ingrese una hora valida" 
+              formControlName="entrada" 
+              enterkeyhint="next" 
+              expand="block"
+              [value]="horaEntrada | date: 'shortTime'" (click)="openModalEntrada()">
+                <div slot="label">
+                  Hora Entrada: <ion-text color="danger">*</ion-text>
+                </div>
+              </ion-input>
+      </ion-item>
+      </ion-col>
+      
+      <ion-col  size="6" class="ion-text-start">
+      <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+        <!-- <ion-label>Hora Salida:</ion-label>
+        <ion-text>{{ horaSalida |date: 'shortTime' }}</ion-text> -->
+        <ion-input 
+        labelPlacement="floating" 
+        type="text" 
+        inputmode="salida"
+        placeholder="Hora de salida"
+        errorText="* Ingrese una hora valida"
+        formControlName="salida" 
+        enterkeyhint="next" 
+        expand="block"
+        [value]="horaSalida | date: 'shortTime'" (click)="openModalSalida()">
+        <div slot="label">
+          Hora Salida: <ion-text color="danger">*</ion-text>
+        </div>
+      </ion-input>
+      </ion-item>
+      </ion-col>
+
+      
+       </ion-row>
+
+          <div class="ion-margin-horizontal label-container">
+            <ion-text class="fwd" color="light" id="left-text" (click)="mostrarFrmContrasena()">Regresar al inicio</ion-text>
+            <ion-text class="fwd" color="light" id="right-text">Forgot Password?</ion-text>
+          </div>
+       
+
+      <div class="ion-margin submit" (click)="onSubmit()">
+        <ion-button expand="block" size="large">
+          <ion-text><strong>Guardar</strong></ion-text>
+        </ion-button>
+      </div>
+    </form>
+</ion-card>
+
+<ion-toast 
+[isOpen]="isToast" 
+[message]="toastMessage" 
+[duration]="3000"
+(didDismiss)="isToast = false">
+</ion-toast>
+
+</ion-content>

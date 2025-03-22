@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>Pagos</artifactId>
+		<groupId>mx.pagos</groupId>
+		<version>1.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<version>1.1</version>
+	<artifactId>PagosRest</artifactId>
+	<name>PagosRest</name>
+	<packaging>jar</packaging>
+
+
+	<dependencies>
+	
+
+		<dependency>
+			<groupId>mx.pagos</groupId>
+			<artifactId>PagosCore</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mx.pagos</groupId>
+			<artifactId>Utils</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>mx.pagos</groupId>
+			<artifactId>PagosPersistence</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mx.pagos</groupId>
+			<artifactId>PagosBusiness</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+	</dependencies>
+
+		<build>
+		<finalName>${project.artifactId}</finalName>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<mainClass>${start-class}</mainClass>
+							<layout>JAR</layout>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/resources/static</directory>
+							<includes>
+								<include>**</include>
+							</includes>
+							<excludes>
+								<exclude>images/**</exclude>
+								<exclude>error/**</exclude>
+								<exclude>admin/**</exclude>
+							</excludes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+
+		</plugins>
+	</build>
+</project>

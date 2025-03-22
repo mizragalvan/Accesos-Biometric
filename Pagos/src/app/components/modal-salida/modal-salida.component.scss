@@ -1,0 +1,34 @@
+.custom-modal .modal-wrapper {
+    width: 90%; /* Ajusta el ancho del modal */
+    max-width: 500px; /* Máximo ancho */
+    height: auto; /* Ajusta la altura al contenido */
+    margin: auto; /* Centra el modal */
+    border-radius: 16px; /* Bordes redondeados si lo deseas */
+  }
+  
+  @media (max-width: 768px) {
+    .custom-modal .modal-wrapper {
+      width: 80%; /* Más pequeño en pantallas más pequeñas */
+      max-width: 400px;
+    }
+  }
+  
+  .modal-content {
+    display: flex;
+    justify-content: center;  /* Centra el contenido horizontalmente */
+    align-items: center;      /* Centra el contenido verticalmente */
+    height: 100%;             /* Asegura que ocupe todo el alto del modal */
+    flex-direction: column;   /* Alinea los elementos en columna */
+    padding: 20px;
+  }
+  
+  ion-item {
+    width: 100%; /* Hace que el componente ion-item ocupe el 100% de su contenedor */
+    max-width: 300px; /* Controla el ancho máximo */
+    margin: 0 auto; /* Centra el item horizontalmente */
+  }
+  
+  .custom-datetime {
+    width: 100%;
+    text-align: center;  /* Centra el texto del datetime */
+  }

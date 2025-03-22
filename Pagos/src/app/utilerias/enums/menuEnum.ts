@@ -1,0 +1,28 @@
+
+export enum MenuEnum {
+    ALERTS = 'Configuración de Alertas',
+    BANDEJAS = 'Bandejas',
+    BINNACLE = 'Bitácora de Movimientos',
+    CAMBIACONTRASENIA = 'Cambio de Contraseña',
+    CATAREA = 'Catálogo de Áreas',
+    CATDOCTYP = 'Catálogo de Tipos de Documentos',
+    CATFINANCIALENTITY = 'Catálogo de Entidades',
+    CATLEGALREPRESENTATIVE = 'Catálogo Representantes Legales',
+    CATNOTICE = 'Catálogo de Noticias y Avisos',
+    CATPOSITION = 'Catálogo de Puestos',
+    CATREQUIREDDOCUMENT = 'Catálogo de Documentos Requeridos por Personalidad',
+    CATSUPPLIER = 'Catálogo de Proveedores',
+    CONFIGURATIONMANAGER = 'Administrador de Configuraciones',
+    CONSULTAQR = 'Pantalla Consulta QR',
+    CONTRATOSFINALIZADOS = 'Contratos Finalizado',
+    FLUJO = 'Ver Flujo',
+    GENERALADMIN = 'Administración General',
+    GESTIONPERFILES = 'Gestión de Perfiles',
+    GESTIONUSUARIOS = 'Gestión de Usuarios',
+    GRAFICAS = 'Vista de Graficas',
+    HOLIDAY = 'Días Inhábiles',
+    HOLIDAYSMANAGER = 'Registro de Vacaciones',
+    PURCHASINGADMIN = 'Administración de Catálogos',
+    REPORTES = 'Vista de Reportes',
+    USUARIO = 'Ajuste de Usuario'
+}

@@ -1,0 +1,67 @@
+export class Entidades {
+    idFinancialEntity: string;
+    name: string;
+    status: string;
+    longName: string;
+    domicile: string;
+    idArticleOfLaw: string;
+    idConfidentialityLaw: string;
+    powersList: [];
+    rfc: string;
+    telefono: string;
+    correo: string;
+    atencion: string;
+    constitutive: string;
+    entidadFinanceiraRegistro: string;
+    entidadFinanceiraRegistroIngles: string;
+    constitutiveEnglish: string;
+    treatment: string;
+    accountNumber: string;
+    bankBranch: string;
+    bankingInstitution: string;
+    numberPage: number;
+    totalRows: string;
+    power: string;
+    idLegalRepresentative: string;
+    legalRepresentativeName: string;
+    idRequisition: string;
+    phone: string;
+    email: string;
+    attention: string;
+    constitutiveRegistred: string;
+    constitutiveRegistredIngles: string;
+
+    constructor() {
+      this.idFinancialEntity = "";
+      this.name = "";
+      this.status = "";
+      this.longName = "";
+      this.domicile = "";
+      this.idArticleOfLaw = "";
+      this.idConfidentialityLaw = "";
+      this.powersList = [];
+      this.rfc = "";
+      this.telefono = "";
+      this.correo = "";
+      this.atencion = "";
+      this.constitutive = "";
+      this.entidadFinanceiraRegistro = "";
+      this.entidadFinanceiraRegistroIngles = "";
+      this.constitutiveEnglish = "";
+      this.treatment = "";
+      this.accountNumber = "";
+      this.bankBranch = "";
+      this.bankingInstitution = "";
+      this.numberPage = 0;
+      this.totalRows = "";
+      this.power = "";
+      this.idLegalRepresentative = "";
+      this.legalRepresentativeName = "";
+      this.idRequisition = "";
+      this.phone = "";
+      this.email = "";
+      this.attention = "";
+      this.constitutiveRegistred = "";
+      this.constitutiveRegistredIngles = "";
+    }
+}
